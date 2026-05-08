@@ -1,0 +1,13 @@
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\bin\Debug\net8.0\Abstracciones.deps.json
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\bin\Debug\net8.0\Abstracciones.dll
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\bin\Debug\net8.0\Abstracciones.pdb
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.csproj.AssemblyReference.cache
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.AssemblyInfoInputs.cache
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.AssemblyInfo.cs
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.csproj.CoreCompileInputs.cache
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.sourcelink.json
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.dll
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\refint\Abstracciones.dll
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\Abstracciones.pdb
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\Abstracciones\obj\Debug\net8.0\ref\Abstracciones.dll

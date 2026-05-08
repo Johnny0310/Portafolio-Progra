@@ -1,0 +1,6 @@
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\BD\bin\Debug\BD.dacpac
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\BD\bin\Debug\BD.dll
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\BD\bin\Debug\BD.pdb
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\BD\obj\Debug\BD.sqlproj.AssemblyReference.cache
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\BD\obj\Debug\BD.dll
+C:\Users\alfre\OneDrive\Documents\Github\Portafolio-Progra\Promraming Fundamentals\react\projects\product-management-dashboard\Productos.API\BD\obj\Debug\BD.pdb

@@ -1,0 +1,10 @@
+﻿
+
+
+CREATE PROCEDURE EliminarCategoria
+    @Id UNIQUEIDENTIFIER
+AS
+BEGIN
+    DELETE FROM Categorias
+    WHERE Id = @Id
+END

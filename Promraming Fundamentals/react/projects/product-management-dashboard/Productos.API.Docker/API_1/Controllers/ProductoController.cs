@@ -32,9 +32,6 @@ namespace API.Controllers
         [HttpPut("{Id}")]
         public async Task<IActionResult> Editar([FromRoute] Guid Id, [FromBody] ProductoRequest producto)
         {
-            if (!await VerificarProductoExiste(Id))
-                return NotFound("El Producto ID no existe");
-
             var resultado = await _productoFlujo.Editar(Id, producto);
             return Ok(resultado);
         }
@@ -42,9 +39,6 @@ namespace API.Controllers
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Eliminar([FromRoute]Guid Id)
         {
-            if (!await VerificarProductoExiste(Id))
-                return NotFound("El Producto ID no existe");
-
             var resultado = await _productoFlujo.Eliminar(Id);
             return NoContent();
         }
@@ -62,22 +56,8 @@ namespace API.Controllers
         [HttpGet("{Id}")]
         public async Task<IActionResult> Obtener([FromRoute]Guid Id)
         {
-            if (!await VerificarProductoExiste(Id))
-                return NotFound("El Producto ID no existe");
-
             var resultado = await _productoFlujo.Obtener(Id);
             return Ok(resultado);
-        }
-        #endregion
-
-        #region Helpers
-        private async Task<bool> VerificarProductoExiste(Guid Id)
-        {
-            var resultadoValidacion = false;
-            var resultadoVehiculoExiste = await _productoFlujo.Obtener(Id);
-            if (resultadoVehiculoExiste != null)
-                resultadoValidacion = true;
-            return resultadoValidacion;
         }
         #endregion
     }

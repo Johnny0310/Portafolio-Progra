@@ -7,15 +7,18 @@ namespace DA
 {
     public class CategoriaDA : ICategoriaDA
     {
-        private readonly NpgsqlConnection _sqlConnection;
+        private readonly IRepositorioDapper _repositorioDapper;
 
         public CategoriaDA(IRepositorioDapper repositorioDapper)
         {
-            _sqlConnection = repositorioDapper.ObetenerRepositorio();
+            _repositorioDapper = repositorioDapper;
         }
 
         public async Task<Guid> Agregar(CategoriaRequest categoria)
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 INSERT INTO categoria
                 (
@@ -31,7 +34,7 @@ namespace DA
 
             Guid nuevoId = Guid.NewGuid();
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = nuevoId,
                 Nombre = categoria.Nombre
@@ -42,7 +45,13 @@ namespace DA
 
         public async Task<Guid> Editar(Guid Id, CategoriaRequest categoria)
         {
-            await verificarCategoriaExiste(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
+            bool existe = await verificarCategoriaExiste(Id);
+
+            if (!existe)
+                throw new Exception("No se encontro la categoria");
 
             string query = @"
                 UPDATE categoria
@@ -51,7 +60,7 @@ namespace DA
                 WHERE id = @Id;
             ";
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = Id,
                 Nombre = categoria.Nombre
@@ -62,14 +71,20 @@ namespace DA
 
         public async Task<Guid> Eliminar(Guid Id)
         {
-            await verificarCategoriaExiste(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
+            bool existe = await verificarCategoriaExiste(Id);
+
+            if (!existe)
+                throw new Exception("No se encontro la categoria");
 
             string query = @"
                 DELETE FROM categoria
                 WHERE id = @Id;
             ";
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = Id
             });
@@ -79,6 +94,9 @@ namespace DA
 
         public async Task<IEnumerable<CategoriaResponse>> Obtener()
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 SELECT
                     id,
@@ -87,13 +105,16 @@ namespace DA
             ";
 
             var resultadoConsulta =
-                await _sqlConnection.QueryAsync<CategoriaResponse>(query);
+                await connection.QueryAsync<CategoriaResponse>(query);
 
             return resultadoConsulta;
         }
 
-        public async Task<CategoriaResponse> Obtener(Guid Id)
+        public async Task<CategoriaResponse?> Obtener(Guid Id)
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 SELECT
                     id,
@@ -103,7 +124,7 @@ namespace DA
             ";
 
             var resultadoConsulta =
-                await _sqlConnection.QueryAsync<CategoriaResponse>(
+                await connection.QueryAsync<CategoriaResponse>(
                     query,
                     new
                     {
@@ -113,13 +134,26 @@ namespace DA
             return resultadoConsulta.FirstOrDefault();
         }
 
-        private async Task verificarCategoriaExiste(Guid Id)
+        private async Task<bool> verificarCategoriaExiste(Guid Id)
         {
-            CategoriaResponse? resultadoConsultaCategoria =
-                await Obtener(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
 
-            if (resultadoConsultaCategoria == null)
-                throw new Exception("No se encontro la categoria");
+            string query = @"
+                SELECT COUNT(*)
+                FROM categoria
+                WHERE id = @Id;
+            ";
+
+            int cantidad =
+                await connection.ExecuteScalarAsync<int>(
+                    query,
+                    new
+                    {
+                        Id = Id
+                    });
+
+            return cantidad > 0;
         }
     }
 }

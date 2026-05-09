@@ -7,15 +7,18 @@ namespace DA
 {
     public class SubCategoriaDA : ISubCategoriaDA
     {
-        private readonly NpgsqlConnection _sqlConnection;
+        private readonly IRepositorioDapper _repositorioDapper;
 
         public SubCategoriaDA(IRepositorioDapper repositorioDapper)
         {
-            _sqlConnection = repositorioDapper.ObetenerRepositorio();
+            _repositorioDapper = repositorioDapper;
         }
 
         public async Task<Guid> Agregar(SubCategoriaRequest subCategoria)
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 INSERT INTO subcategoria
                 (
@@ -33,7 +36,7 @@ namespace DA
 
             Guid nuevoId = Guid.NewGuid();
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = nuevoId,
                 IdCategoria = subCategoria.IdCategoria,
@@ -45,7 +48,13 @@ namespace DA
 
         public async Task<Guid> Editar(Guid Id, SubCategoriaRequest subCategoria)
         {
-            await verificarSubCategoriaExiste(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
+            bool existe = await verificarSubCategoriaExiste(Id);
+
+            if (!existe)
+                throw new Exception("No se encontro la subcategoria");
 
             string query = @"
                 UPDATE subcategoria
@@ -55,7 +64,7 @@ namespace DA
                 WHERE id = @Id;
             ";
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = Id,
                 IdCategoria = subCategoria.IdCategoria,
@@ -67,14 +76,20 @@ namespace DA
 
         public async Task<Guid> Eliminar(Guid Id)
         {
-            await verificarSubCategoriaExiste(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
+            bool existe = await verificarSubCategoriaExiste(Id);
+
+            if (!existe)
+                throw new Exception("No se encontro la subcategoria");
 
             string query = @"
                 DELETE FROM subcategoria
                 WHERE id = @Id;
             ";
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = Id
             });
@@ -84,6 +99,9 @@ namespace DA
 
         public async Task<IEnumerable<SubCategoriaResponse>> Obtener()
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 SELECT
                     s.id,
@@ -96,13 +114,16 @@ namespace DA
             ";
 
             var resultadoConsulta =
-                await _sqlConnection.QueryAsync<SubCategoriaResponse>(query);
+                await connection.QueryAsync<SubCategoriaResponse>(query);
 
             return resultadoConsulta;
         }
 
-        public async Task<SubCategoriaResponse> Obtener(Guid Id)
+        public async Task<SubCategoriaResponse?> Obtener(Guid Id)
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 SELECT
                     s.id,
@@ -116,7 +137,7 @@ namespace DA
             ";
 
             var resultadoConsulta =
-                await _sqlConnection.QueryAsync<SubCategoriaResponse>(
+                await connection.QueryAsync<SubCategoriaResponse>(
                     query,
                     new
                     {
@@ -126,13 +147,26 @@ namespace DA
             return resultadoConsulta.FirstOrDefault();
         }
 
-        private async Task verificarSubCategoriaExiste(Guid Id)
+        private async Task<bool> verificarSubCategoriaExiste(Guid Id)
         {
-            SubCategoriaResponse? resultadoConsultaSubCategoria =
-                await Obtener(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
 
-            if (resultadoConsultaSubCategoria == null)
-                throw new Exception("No se encontro la subcategoria");
+            string query = @"
+                SELECT COUNT(*)
+                FROM subcategoria
+                WHERE id = @Id;
+            ";
+
+            int cantidad =
+                await connection.ExecuteScalarAsync<int>(
+                    query,
+                    new
+                    {
+                        Id = Id
+                    });
+
+            return cantidad > 0;
         }
     }
 }

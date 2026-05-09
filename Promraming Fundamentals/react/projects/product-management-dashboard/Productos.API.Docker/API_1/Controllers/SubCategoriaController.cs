@@ -40,9 +40,6 @@ namespace API.Controllers
             [FromRoute] Guid Id,
             [FromBody] SubCategoriaRequest subCategoria)
         {
-            if (!await VerificarSubCategoriaExiste(Id))
-                return NotFound("La SubCategoria ID no existe");
-
             var resultado =
                 await _subCategoriaFlujo.Editar(Id, subCategoria);
 
@@ -53,8 +50,6 @@ namespace API.Controllers
         public async Task<IActionResult> Eliminar(
             [FromRoute] Guid Id)
         {
-            if (!await VerificarSubCategoriaExiste(Id))
-                return NotFound("La SubCategoria ID no existe");
 
             await _subCategoriaFlujo.Eliminar(Id);
 
@@ -77,8 +72,6 @@ namespace API.Controllers
         public async Task<IActionResult> Obtener(
             [FromRoute] Guid Id)
         {
-            if (!await VerificarSubCategoriaExiste(Id))
-                return NotFound("La SubCategoria ID no existe");
 
             var resultado =
                 await _subCategoriaFlujo.Obtener(Id);
@@ -88,21 +81,5 @@ namespace API.Controllers
 
         #endregion
 
-        #region Helpers
-
-        private async Task<bool> VerificarSubCategoriaExiste(Guid Id)
-        {
-            var resultadoValidacion = false;
-
-            var resultadoSubCategoriaExiste =
-                await _subCategoriaFlujo.Obtener(Id);
-
-            if (resultadoSubCategoriaExiste != null)
-                resultadoValidacion = true;
-
-            return resultadoValidacion;
-        }
-
-        #endregion
     }
 }

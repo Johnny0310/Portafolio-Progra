@@ -11,7 +11,7 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: 'https://localhost:7281',
+                target: 'https://aws-1-us-east-2.pooler.supabase.com:6543',
                 secure: false
             }
         }

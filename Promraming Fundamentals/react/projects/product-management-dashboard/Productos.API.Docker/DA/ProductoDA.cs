@@ -7,15 +7,18 @@ namespace DA
 {
     public class ProductoDA : IProductoDA
     {
-        private readonly NpgsqlConnection _sqlConnection;
+        private readonly IRepositorioDapper _repositorioDapper;
 
         public ProductoDA(IRepositorioDapper repositorioDapper)
         {
-            _sqlConnection = repositorioDapper.ObetenerRepositorio();
+            _repositorioDapper = repositorioDapper;
         }
 
         public async Task<Guid> Agregar(ProductoRequest producto)
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 INSERT INTO producto
                 (
@@ -41,7 +44,7 @@ namespace DA
 
             Guid nuevoId = Guid.NewGuid();
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = nuevoId,
                 IdSubCategoria = producto.IdSubCategoria,
@@ -57,7 +60,13 @@ namespace DA
 
         public async Task<Guid> Editar(Guid Id, ProductoRequest producto)
         {
-            await verificarProductoExiste(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
+            bool existe = await verificarProductoExiste(Id);
+
+            if (!existe)
+                throw new Exception("No se encontro el producto");
 
             string query = @"
                 UPDATE producto
@@ -71,7 +80,7 @@ namespace DA
                 WHERE id = @Id;
             ";
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = Id,
                 IdSubCategoria = producto.IdSubCategoria,
@@ -87,14 +96,20 @@ namespace DA
 
         public async Task<Guid> Eliminar(Guid Id)
         {
-            await verificarProductoExiste(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
+            bool existe = await verificarProductoExiste(Id);
+
+            if (!existe)
+                throw new Exception("No se encontro el producto");
 
             string query = @"
                 DELETE FROM producto
                 WHERE id = @Id;
             ";
 
-            await _sqlConnection.ExecuteAsync(query, new
+            await connection.ExecuteAsync(query, new
             {
                 Id = Id
             });
@@ -104,6 +119,9 @@ namespace DA
 
         public async Task<IEnumerable<ProductoResponse>> Obtener()
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 SELECT
                     p.id,
@@ -122,13 +140,16 @@ namespace DA
             ";
 
             var resultadoConsulta =
-                await _sqlConnection.QueryAsync<ProductoResponse>(query);
+                await connection.QueryAsync<ProductoResponse>(query);
 
             return resultadoConsulta;
         }
 
-        public async Task<ProductoResponse> Obtener(Guid Id)
+        public async Task<ProductoResponse?> Obtener(Guid Id)
         {
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
+
             string query = @"
                 SELECT
                     p.id,
@@ -148,7 +169,7 @@ namespace DA
             ";
 
             var resultadoConsulta =
-                await _sqlConnection.QueryAsync<ProductoResponse>(
+                await connection.QueryAsync<ProductoResponse>(
                     query,
                     new
                     {
@@ -158,13 +179,26 @@ namespace DA
             return resultadoConsulta.FirstOrDefault();
         }
 
-        private async Task verificarProductoExiste(Guid Id)
+        private async Task<bool> verificarProductoExiste(Guid Id)
         {
-            ProductoResponse? resultadoConsultaProducto =
-                await Obtener(Id);
+            using var connection =
+                _repositorioDapper.ObetenerRepositorio();
 
-            if (resultadoConsultaProducto == null)
-                throw new Exception("No se encontro el producto");
+            string query = @"
+                SELECT COUNT(*)
+                FROM producto
+                WHERE id = @Id;
+            ";
+
+            int cantidad =
+                await connection.ExecuteScalarAsync<int>(
+                    query,
+                    new
+                    {
+                        Id = Id
+                    });
+
+            return cantidad > 0;
         }
     }
 }

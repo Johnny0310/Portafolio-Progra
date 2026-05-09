@@ -11,8 +11,9 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: 'https://aws-1-us-east-2.pooler.supabase.com:6543',
-                secure: false
+                target: 'https://api-productos-2sdo.onrender.com',
+                changeOrigin: true,
+                secure: true
             }
         }
     }

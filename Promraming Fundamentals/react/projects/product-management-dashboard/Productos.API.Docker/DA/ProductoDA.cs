@@ -158,6 +158,7 @@ namespace DA
                     p.precio,
                     p.stock,
                     p.codigobarras AS CodigoBarras,
+                    p.idsubcategoria AS IdSubCategoria
                     s.nombre AS SubCategoria,
                     c.nombre AS Categoria
                 FROM producto p

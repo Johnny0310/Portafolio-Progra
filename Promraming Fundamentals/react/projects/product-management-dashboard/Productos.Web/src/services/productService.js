@@ -23,7 +23,7 @@ export async function getProduct(id) {
     if (!response.ok) {
         throw new Error("Error fetching product");
     }
-
+    
     return await response.json();
 }
 

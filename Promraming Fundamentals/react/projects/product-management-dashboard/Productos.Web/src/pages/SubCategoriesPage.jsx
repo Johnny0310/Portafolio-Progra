@@ -137,7 +137,9 @@ function SubCategoriesPage() {
 
         } catch (error) {
 
-            console.error(error);
+            alert(
+                "Cannot delete this subcategory because it has related products."
+            );
         }
     }
 

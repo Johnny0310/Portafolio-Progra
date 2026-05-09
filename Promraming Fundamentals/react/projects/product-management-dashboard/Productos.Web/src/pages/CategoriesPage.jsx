@@ -113,8 +113,9 @@ function CategoriesPage() {
             setShowDeleteModal(false);
 
         } catch (error) {
-
-            console.error(error);
+            alert(
+                "Cannot delete this category because it has related subcategories."
+            );
         }
     }
 

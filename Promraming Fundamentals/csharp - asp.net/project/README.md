@@ -1,52 +1,113 @@
-# 🏗️ Guía: Arquitectura por Capas en ASP.NET Core
+# 🏗️ ASP.NET Core Layered Architecture Guide
 
-## 🎯 Objetivo
-
-En esta guía se construye una API en ASP.NET Core aplicando una arquitectura por capas utilizada en entornos empresariales.
-
-El objetivo es demostrar:
-
-* Separación de responsabilidades
-* Uso de abstracciones (interfaces)
-* Implementación de reglas de negocio
-* Acceso a datos con Dapper
-* Flujo completo desde modelo hasta endpoint
+A complete step-by-step guide for building a professional ASP.NET Core API using a layered architecture commonly used in enterprise environments.
 
 ---
 
-## 📚 ¿Qué aprenderás?
+# 🎯 Goal
 
-* Cómo estructurar un proyecto real en ASP.NET
-* Cómo conectar capas correctamente
-* Cómo evitar lógica en controllers
-* Cómo implementar flujo + reglas + DA
+This project demonstrates how to build a clean and scalable backend architecture using:
 
----
-
-## 🧱 Estructura de la guía
-
-La guía está dividida en pasos:
-
-1. Creación del proyecto
-2. Modelos
-3. Abstracciones
-4. Data Access
-5. Reglas
-6. Flujo
-7. API Controllers
-8. Configuración (appsettings + Program.cs)
-9. Flujo completo
+✅ Separation of concerns
+✅ Interfaces and abstractions
+✅ Business rules layer
+✅ Data Access Layer (DA)
+✅ Dapper integration
+✅ SQL Server database
+✅ REST API endpoints
+✅ Validation with Data Annotations
 
 ---
 
-## ⚙️ Código final
+# 📚 What You Will Learn
 
-Puedes ver el resultado completo en:
-
-📁 `/codigo-final`
+🔹 How to structure a real-world ASP.NET Core solution
+🔹 How to organize projects using layers
+🔹 How to avoid business logic inside controllers
+🔹 How to implement Flow + Rules + DA architecture
+🔹 How to connect SQL Server using Dapper
+🔹 How to create maintainable APIs
 
 ---
 
-## 🚀 Recomendación
+# 🧱 Architecture Overview
 
-Sigue los pasos en orden para entender completamente el flujo del sistema.
+This project follows a layered architecture:
+
+```txt id="f8k2qp"
+API
+│
+├── Flujo (Business Flow)
+│
+├── DA (Data Access)
+│
+├── Abstracciones (Interfaces & Models)
+│
+└── SQL Server Database
+```
+
+---
+
+# ⚙️ Technologies Used
+
+## 🚀 Backend
+
+* ASP.NET Core
+* C#
+* REST API
+* Swagger
+
+## 🗄️ Database
+
+* SQL Server
+* Stored Procedures
+* Dapper ORM
+
+## 🧩 Architecture
+
+* Layered Architecture
+* Interfaces
+* Dependency Injection
+
+---
+
+# 📖 Step-by-Step Guide
+
+The guide is divided into multiple sections:
+
+1️⃣ Project Creation
+2️⃣ Models
+3️⃣ Interfaces & Abstractions
+4️⃣ Data Access Layer
+5️⃣ Business Rules
+6️⃣ Flow Layer
+7️⃣ API Controllers
+8️⃣ Configuration (Program.cs + appsettings.json)
+9️⃣ Full Request Flow
+
+---
+
+# 🧪 API Testing
+
+The API can be tested using:
+
+✅ Swagger UI
+✅ Postman
+
+---
+
+# 📂 Final Code
+
+You can find the complete implementation inside:
+
+```txt id="q4m7vx"
+/Productos.API
+```
+
+---
+
+# 💡 Recommendation
+
+Follow the guide step-by-step to fully understand how requests travel across all layers of the system.
+
+This project is focused on building a strong backend foundation using professional architecture practices.

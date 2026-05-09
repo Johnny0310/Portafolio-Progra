@@ -40,7 +40,14 @@ export async function createProduct(product) {
     });
 
     if (!response.ok) {
-        throw new Error("Error creating product");
+        
+        const errorData = await response.json();
+
+        const messages = Object.values(errorData.errors)
+            .flat()
+            .join('\n');
+
+        throw new Error(messages);
     }
 }
 

@@ -101,6 +101,10 @@ function ProductsPage() {
     async function handleSave(product) {
 
         try {
+            console.log(
+                "PRODUCT SENT TO API:",
+                JSON.stringify(product, null, 2)
+            );
 
             if (product.id) {
 
@@ -116,6 +120,8 @@ function ProductsPage() {
             setShowCreateModal(false);
 
         } catch (error) {
+
+            alert(error.message);
 
             console.error(error);
         }

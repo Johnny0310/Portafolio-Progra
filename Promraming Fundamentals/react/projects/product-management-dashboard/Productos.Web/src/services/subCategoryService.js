@@ -1,8 +1,9 @@
-const API_URL = "/api/SubCategoria";
+// const API_URL = "/api/SubCategoria";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function getSubCategories() {
 
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/SubCategoria`);
 
     if (!response.ok) {
         throw new Error("Error fetching subcategories");
@@ -28,7 +29,7 @@ export async function getSubCategory(id) {
 
 export async function createSubCategory(subCategory) {
 
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${API_URL}/SubCategoria`, {
         method: "POST",
 
         headers: {
@@ -45,7 +46,7 @@ export async function createSubCategory(subCategory) {
 
 export async function updateSubCategory(id, subCategory) {
 
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/SubCategoria/${id}`, {
         method: "PUT",
 
         headers: {
@@ -62,7 +63,7 @@ export async function updateSubCategory(id, subCategory) {
 
 export async function deleteSubCategory(id) {
 
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/SubCategoria/${id}`, {
         method: "DELETE"
     });
 

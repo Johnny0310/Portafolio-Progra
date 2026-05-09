@@ -1,8 +1,9 @@
-const API_URL = "/api/Producto";
+// const API_URL = "/api/Producto";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function getProducts() {
 
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/Producto`);
 
     if (!response.ok) {
         throw new Error("Error fetching products");
@@ -17,7 +18,7 @@ export async function getProducts() {
 
 export async function getProduct(id) {
 
-    const response = await fetch(`${API_URL}/${id}`);
+    const response = await fetch(`${API_URL}/Producto/${id}`);
 
     if (!response.ok) {
         throw new Error("Error fetching product");
@@ -28,7 +29,7 @@ export async function getProduct(id) {
 
 export async function createProduct(product) {
 
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${API_URL}/Producto`, {
         method: "POST",
 
         headers: {
@@ -45,7 +46,7 @@ export async function createProduct(product) {
 
 export async function updateProduct(id, product) {
 
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/Producto/${id}`, {
         method: "PUT",
 
         headers: {
@@ -62,7 +63,7 @@ export async function updateProduct(id, product) {
 
 export async function deleteProduct(id) {
 
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/Producto/${id}`, {
         method: "DELETE"
     });
 

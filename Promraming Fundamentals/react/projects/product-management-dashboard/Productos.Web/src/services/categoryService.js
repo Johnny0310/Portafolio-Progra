@@ -1,8 +1,9 @@
-const API_URL = "/api/Categoria";
+ // const API_URL = "/api/Categoria";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function getCategories() {
 
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/Categoria`);
 
     if (!response.ok) {
         throw new Error("Error fetching categories");
@@ -32,7 +33,7 @@ export async function getCategory(id) {
 
 export async function createCategory(category) {
 
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${API_URL}/Categoria`, {
         method: "POST",
 
         headers: {
@@ -49,7 +50,7 @@ export async function createCategory(category) {
 
 export async function updateCategory(id, category) {
 
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/Categoria/${id}`, {
         method: "PUT",
 
         headers: {

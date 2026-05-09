@@ -6,6 +6,21 @@ using Flujo;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// CORS Front End
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -35,6 +50,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 

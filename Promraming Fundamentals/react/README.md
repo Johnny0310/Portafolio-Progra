@@ -22,7 +22,7 @@ https://calculator-kappa-one-51.vercel.app/
 Full Stack management system with Products, Categories, and SubCategories.
 
 🔗 Frontend Demo:
-https://products-phi-five.vercel.app/products
+https://products-phi-five.vercel.app/
 
 🔗 Backend Swagger API:
 https://api-productos-2sdo.onrender.com/swagger/index.html
@@ -169,7 +169,7 @@ https://calculator-kappa-one-51.vercel.app/
 
 ## 📦 Product Management Dashboard
 
-https://products-phi-five.vercel.app/products
+https://products-phi-five.vercel.app/
 
 ## 📘 Swagger API
 

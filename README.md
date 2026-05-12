@@ -42,42 +42,41 @@
 
 ## ☁️ Cloud
 
-- [Azure](./Cloud/Azure/)
-- [Firebase](./Cloud/Firebase/)
+- [Azure](./Cloud/Azure/README.md)
+- [Firebase](./Cloud/Firebase/README.md)
 - [Cloud README](./Cloud/README.md)
 
 ---
 
 ## 🔥 Firebase Modules
 
-- [01-Core-Concepts](./Cloud/Firebase/01-Core-Concepts/)
-- [02-Authentication](./Cloud/Firebase/02-Authentication/)
-- [03-Firestore](./Cloud/Firebase/03-Firestore/)
-- [04-Storage](./Cloud/Firebase/04-Storage/)
-- [05-Cloud-Functions](./Cloud/Firebase/05-Cloud-Functions/)
-- [06-Hosting](./Cloud/Firebase/06-Hosting/)
-- [07-Security-Rules](./Cloud/Firebase/07-Security-Rules/)
-- [08-Monitoring](./Cloud/Firebase/08-Monitoring/)
-- [09-Architecture](./Cloud/Firebase/09-Architecture/)
-- [10-Troubleshooting](./Cloud/Firebase/10-Troubleshooting/)
+- [01-Core-Concepts](./Cloud/Firebase/01-Core-Concepts/README.md)
+- [02-Authentication](./Cloud/Firebase/02-Authentication/README.md)
+- [03-Firestore](./Cloud/Firebase/03-Firestore/README.md)
+- [04-Storage](./Cloud/Firebase/04-Storage/README.md)
+- [05-Cloud-Functions](./Cloud/Firebase/05-Cloud-Functions/README.md)
+- [06-Hosting](./Cloud/Firebase/06-Hosting/README.md)
+- [07-Security-Rules](./Cloud/Firebase/07-Security-Rules/README.md)
+- [08-Monitoring](./Cloud/Firebase/08-Monitoring/README.md)
+- [09-Architecture](./Cloud/Firebase/09-Architecture/README.md)
 - [Firebase README](./Cloud/Firebase/README.md)
 
 ---
 
 ## 💻 Programming Fundamentals
 
-- [Programming Fundamentals](./Programming-Fundamentals/)
-- [C# & ASP.NET](./Programming-Fundamentals/csharp-aspnet/)
-- [Java](./Programming-Fundamentals/java/)
-- [JavaScript](./Programming-Fundamentals/javascript/)
-- [React](./Programming-Fundamentals/react/)
+- [Programming Fundamentals](./Programming-Fundamentals/README.md)
+- [C# & ASP.NET](./Programming-Fundamentals/csharp-aspnet/README.md)
+- [Java](./Programming-Fundamentals/java/README.md)
+- [JavaScript](./Programming-Fundamentals/javascript/README.md)
+- [React](./Programming-Fundamentals/react/README.md)
 - [Programming Fundamentals README](./Programming-Fundamentals/README.md)
 
 ---
 
 ## 🧪 Fullstack Projects
 
-- [Fullstack Projects](./Fullstack-Projects/)
+- [Fullstack Projects](./Programming-Fundamentals/react/projects/product-management-dashboard/)
 
 ---
 

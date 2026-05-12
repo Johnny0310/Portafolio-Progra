@@ -1,28 +1,103 @@
-# 🚀 Portafolio-Progra
+# 🚀 Cloud & Software Engineering Portfolio
 
-Professional Full Stack Development portfolio containing projects focused on frontend development, backend APIs, databases, cloud deployment, and software architecture.
-
-This repository showcases practical projects built with modern technologies used in real-world development environments.
+> Professional portfolio focused on Cloud Engineering, Full Stack Development, Backend Architecture, Firebase, Azure, APIs, Monitoring, and Production-Ready Systems.
 
 ---
 
-# 💼 About This Portfolio
+# 📚 Table of Contents
 
-This portfolio was created to demonstrate skills in:
-
-✅ Full Stack Development
-✅ Frontend Development
-✅ Backend API Development
-✅ Database Integration
-✅ Cloud Deployment
-✅ Software Architecture
-✅ Responsive UI Design
-✅ REST APIs
-✅ Clean Code Practices
+- [� Cloud \& Software Engineering Portfolio](#-cloud--software-engineering-portfolio)
+- [📚 Table of Contents](#-table-of-contents)
+- [📌 Overview](#-overview)
+- [🏗️ Repository Structure](#️-repository-structure)
+- [☁️ Cloud Engineering](#️-cloud-engineering)
+- [💻 Full Stack Development](#-full-stack-development)
+- [🧪 Featured Projects](#-featured-projects)
+  - [🧮 Scientific Calculator React](#-scientific-calculator-react)
+  - [📦 Product Management Dashboard](#-product-management-dashboard)
+- [🛠️ Technologies](#️-technologies)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+  - [Cloud](#cloud)
+- [🎯 Portfolio Goals](#-portfolio-goals)
+- [🔗 Links](#-links)
+  - [💼 LinkedIn](#-linkedin)
+  - [🐙 GitHub](#-github)
+- [🧠 Final Notes](#-final-notes)
 
 ---
 
-# 🚀 Live Projects
+# 📌 Overview
+
+This repository contains multiple engineering-focused learning paths and practical projects designed to demonstrate real-world cloud and software engineering skills.
+
+Main focus areas:
+
+- Cloud Engineering
+- Firebase
+- Microsoft Azure
+- Full Stack Development
+- Backend APIs
+- Monitoring & Troubleshooting
+- Serverless Architectures
+- Database Systems
+- Cloud Deployments
+- Production Engineering Practices
+
+---
+
+# 🏗️ Repository Structure
+
+```bash
+Portfolio/
+│
+├── Cloud/
+│   ├── Azure/
+│   └── Firebase/
+│
+├── Programming-Fundamentals/
+│   ├── csharp-aspnet/
+│   ├── java/
+│   ├── javascript/
+│   └── react/
+│
+├── Fullstack-Projects/
+│
+└── README.md
+```
+
+---
+
+# ☁️ Cloud Engineering
+
+Enterprise-focused cloud engineering documentation and architecture portfolio covering:
+
+- Microsoft Azure
+- Firebase
+- Monitoring & Observability
+- Serverless Systems
+- Authentication
+- Cloud Security
+- Production Architectures
+- Troubleshooting
+
+---
+
+# 💻 Full Stack Development
+
+Practical software engineering projects focused on:
+
+- Frontend Development
+- Backend APIs
+- Databases
+- Cloud Deployments
+- Clean Architecture
+- Responsive UI Design
+- REST APIs
+
+---
+
+# 🧪 Featured Projects
 
 ## 🧮 Scientific Calculator React
 
@@ -37,172 +112,74 @@ https://calculator-kappa-one-51.vercel.app/
 
 Full Stack management system with Products, Categories, and SubCategories.
 
-🔗 Frontend Demo:
+🔗 Frontend:
 https://products-phi-five.vercel.app
 
-🔗 Backend Swagger API:
+🔗 Swagger API:
 https://api-productos-2sdo.onrender.com/swagger/index.html
 
 ---
 
-# 🛠️ Technologies Used
+# 🛠️ Technologies
 
-## ⚛️ Frontend
+## Frontend
 
-* React
-* Vite
-* TailwindCSS
-* JavaScript
-* React Router DOM
-* Fetch API
-* Responsive Design
-* Reusable Components
+- React
+- Vite
+- TailwindCSS
+- JavaScript
+- React Router DOM
 
 ---
 
-## 🖥️ Backend
+## Backend
 
-* ASP.NET Core 8
-* REST APIs
-* Dapper
-* SQL Server
-* PostgreSQL
-* Supabase
-* Docker
-* Swagger
+- ASP.NET Core 8
+- REST APIs
+- Dapper
+- SQL Server
+- PostgreSQL
+- Supabase
 
 ---
 
-## ☁️ Cloud & Deployment
+## Cloud
 
-* Vercel
-* Render
-* Docker
-* Supabase
-
----
-
-# 📂 Repository Structure
-
-```txt id="m9v2xp"
-Programming Fundamentals/
-│
-├── csharp - asp.net/
-│   ├── fundamentals/
-│   └── project/
-│
-├── java/
-│   ├── fundamentals/
-│   └── project/
-│
-├── javascript/
-│   ├── fundamentals/
-│   └── projects/
-│
-└── react/
-    ├── fundamentals/
-    └── projects/
-```
+- Firebase
+- Azure
+- Vercel
+- Render
+- Docker
 
 ---
 
-# 📚 Learning Sections
+# 🎯 Portfolio Goals
 
-This repository also contains learning notes and examples for multiple technologies.
+This portfolio is designed to:
 
-## ☕ Java
-
-* Variables
-* Loops
-* Arrays
-* Functions
-* Error Handling
-
-## ⚡ JavaScript
-
-* DOM Manipulation
-* Events
-* Functions
-* Arrays
-* Conditionals
-
-## ⚛️ React
-
-* Components
-* Props
-* State
-* Hooks
-* Forms
-* API Calls
-
-## 🖥️ ASP.NET Core
-
-* Layered Architecture
-* REST APIs
-* Dapper
-* Dependency Injection
-* SQL Server Integration
+- Demonstrate real engineering skills
+- Build production-ready architectures
+- Practice enterprise documentation
+- Improve troubleshooting workflows
+- Learn cloud-native systems
+- Showcase full stack projects
 
 ---
 
-# 📦 Product Management Dashboard
-
-This Full Stack project contains multiple backend implementations.
-
-## 🗄️ SQL Server API Version
-
-Built using:
-
-* SQL Server
-* Stored Procedures
-* Microsoft.Data.SqlClient
-* ASP.NET Core
-
----
-
-## 🐳 Docker + PostgreSQL Version
-
-Cloud-native version built using:
-
-* PostgreSQL
-* Supabase
-* Npgsql
-* Docker
-* Render Deployment
-
----
-
-# 🎯 Portfolio Focus
-
-The goal of this portfolio is to demonstrate:
-
-✅ Real Full Stack Projects
-✅ Modern Frontend Development
-✅ Enterprise Backend Architecture
-✅ Cloud Deployment Workflows
-✅ Professional Project Organization
-✅ Database Design & Integration
-
----
-
-# 🔗 Project Links
-
-## 🧮 Scientific Calculator React
-
-https://calculator-kappa-one-51.vercel.app/
-
-## 📦 Product Management Dashboard
-
-https://products-phi-five.vercel.app
-
-## 📘 Swagger API
-
-https://api-productos-2sdo.onrender.com/swagger/index.html
+# 🔗 Links
 
 ## 💼 LinkedIn
 
 https://www.linkedin.com/in/johnny-gallo-948524207/
 
+---
+
 ## 🐙 GitHub
 
-https://github.com/Johnny0310/Portafolio-Progra
+https://github.com/Johnny0310
+
+---
+
+# 🧠 Final Notes
+
+This repository represents a continuous engineering learning journey focused on cloud systems, backend development, monitoring, scalability, and production-ready architectures.

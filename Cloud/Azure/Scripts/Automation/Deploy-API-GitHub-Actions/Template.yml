@@ -1,0 +1,141 @@
+name: Deploy .NET API to Azure
+
+env:
+
+  # Azure App Service Name
+  AZURE_WEBAPP_NAME: !-- YOUR_WEBAPP_NAME --!
+
+  # Path to the API project
+  # Example:
+  # './MyProject.API/API'
+  AZURE_WEBAPP_PACKAGE_PATH: './!-- YOUR_PROJECT_PATH --!'
+
+  # .NET SDK Version
+  DOTNET_VERSION: '8.0'
+
+on:
+  push:
+    branches: [ "main" ]
+
+    paths-ignore:
+
+      # Ignore database folder changes
+      # Change this path if your database folder changes
+      - '!-- YOUR_DATABASE_FOLDER_PATH --!/**'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+    # Change project folder if root folder changes
+    # Example:
+    # cd "MyProject.API"
+
+      - name: Restore dependencies
+        run: |
+          cd "!-- ROOT_PROJECT_FOLDER --!"
+
+          dotnet restore "!-- PROJECT_1_PATH --!"
+          dotnet restore "!-- PROJECT_2_PATH --!"
+          dotnet restore "!-- PROJECT_3_PATH --!"
+          dotnet restore "!-- API_PROJECT_PATH --!"
+
+      # Change project paths if architecture changes
+      # Example:
+      # "Services/Services.csproj"
+
+      - name: Build with dotnet
+        run: |
+          cd "!-- ROOT_PROJECT_FOLDER --!"
+
+          dotnet build "!-- PROJECT_1_PATH --!" --configuration Release --no-restore
+          dotnet build "!-- PROJECT_2_PATH --!" --configuration Release --no-restore
+          dotnet build "!-- PROJECT_3_PATH --!" --configuration Release --no-restore
+          dotnet build "!-- API_PROJECT_PATH --!" --configuration Release --no-restore
+
+      # Optional test execution
+      # Change path if test project changes
+      # Example:
+      # "MyProject.API/Tests/Tests.csproj"
+      - name: Run tests
+        run: |
+          cd "!-- ROOT_PROJECT_FOLDER --!"
+          dotnet test "!-- API_PROJECT_PATH --!" --no-restore --verbosity normal --configuration Release || echo "No tests found or test execution failed"
+
+      # Change API project path if needed
+      # Example:
+      # "MyProject.API/API/API.csproj"
+      - name: Publish API
+        run: |
+          dotnet publish "!-- API_PROJECT_PATH --!" -c Release -o ./publish --no-build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ./publish
+
+  deploy:
+
+    permissions:
+      contents: none
+
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    environment:
+
+      # Environment Name
+      # Example:
+      # Production-API
+      name: '!-- ENVIRONMENT_NAME --!'
+
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+
+          # Azure App Service Name
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+
+          # GitHub Secret Name
+          # Example:
+          # AZURE_API_PUBLISH_PROFILE
+          publish-profile: ${{ secrets.!-- YOUR_SECRET_NAME --! }}
+
+          package: .
+
+          respect-funcignore: true

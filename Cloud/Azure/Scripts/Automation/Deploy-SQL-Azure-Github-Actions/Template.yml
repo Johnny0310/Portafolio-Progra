@@ -1,0 +1,113 @@
+name: Deploy SQL Database to Azure
+
+env:
+
+  # Azure SQL Server
+  # Example:
+  # myserver.database.windows.net
+  AZURE_SQL_SERVER: !-- YOUR_SQL_SERVER --!
+
+  # Azure SQL Database Name
+  AZURE_SQL_DATABASE: !-- YOUR_DATABASE_NAME --!
+
+  # DACPAC Output Path
+  # Example:
+  # MyProject.API/BD/bin/Release/BD.dacpac
+  DACPAC_PATH: '!-- YOUR_DACPAC_PATH --!'
+
+on:
+  push:
+    branches: [ "main" ]
+
+    paths:
+
+      # Trigger workflow only when database files change
+      # Change this path if your database folder changes
+      - '!-- YOUR_DATABASE_FOLDER_PATH --!/**'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+
+  build-and-deploy-database:
+
+    runs-on: windows-latest
+
+    environment:
+
+      # Environment Name
+      # Example:
+      # Production-Database
+      name: '!-- ENVIRONMENT_NAME --!'
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+
+      # Change solution path if needed
+      # Example:
+      # "MyProject.API/MyProject.API.sln"
+      - name: Restore NuGet packages
+        run: |
+          nuget restore "!-- YOUR_SOLUTION_PATH --!"
+
+      # Change SQL project path if needed
+      # Example:
+      # "MyProject.API/BD/BD.sqlproj"
+      - name: Build Database Project
+        run: |
+          msbuild "!-- YOUR_SQLPROJ_PATH --!" /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath="./bin/Release/"
+        shell: cmd
+
+      - name: Verify DACPAC file exists
+        run: |
+
+          if (Test-Path "${{ env.DACPAC_PATH }}") {
+
+            Write-Host "DACPAC file found at ${{ env.DACPAC_PATH }}"
+
+            Get-Item "${{ env.DACPAC_PATH }}" | Format-List
+
+          } else {
+
+            Write-Error "DACPAC file not found at ${{ env.DACPAC_PATH }}"
+
+            exit 1
+          }
+
+        shell: powershell
+
+      - name: Deploy to Azure SQL Database
+        uses: azure/sql-action@v2
+        with:
+
+          # GitHub Secret Name
+          # Example:
+          # AZURE_SQL_CONNECTION_STRING
+          connection-string: ${{ secrets.!-- YOUR_SECRET_NAME --! }}
+
+          path: ${{ env.DACPAC_PATH }}
+
+          action: 'publish'
+
+          arguments: '/p:DropObjectsNotInSource=false /p:BlockOnPossibleDataLoss=true /p:IgnoreRoleMembership=true'
+
+      - name: Database Deployment Summary
+        run: |
+
+          Write-Host "Database deployment completed successfully!"
+
+          Write-Host "Target Server: ${{ env.AZURE_SQL_SERVER }}"
+
+          Write-Host "Target Database: ${{ env.AZURE_SQL_DATABASE }}"
+
+        shell: powershell
